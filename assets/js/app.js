@@ -14,6 +14,9 @@ const prdfr = async() => {
     const productitems = await productFetch()
     const products = productitems.products
     productContainer.innerHTML = ``
+
+    const categories = [...new Set(products.map(product => product.category))];
+    console.log(categories);
     for(const producting of products){
        const productBox = document.createElement('div')
        productBox.classList.add("product-box")
@@ -41,7 +44,11 @@ const prdfr = async() => {
                             <div class="product-image">
                                 <img src="${parseProducting.thumbnail}">
                             </div>
-                            <div class="product-text"></div>
+                            <div class="product-text">
+                                <h2>${parseProducting.title}</h2>
+                                <p>${parseProducting.description}</p>
+                                <p>${parseProducting.category}</p>
+                            </div>
                         </div>
                     </div>
                 `
@@ -49,6 +56,7 @@ const prdfr = async() => {
                 exits.addEventListener("click", function(){
                     itemcontainer.classList.remove("gorunur")
                 })
+
             }
             else{
                 console.log("ürün bulunamadı");
