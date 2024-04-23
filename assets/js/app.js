@@ -26,13 +26,29 @@ const prdfr = async() => {
         productContainer.appendChild(productBox);
         productBox.addEventListener("click",function(){
             localStorage.setItem(`${producting.id}`, JSON.stringify(producting))
-            itemcontainer.classList.add("gorunur")
+            itemcontainer.classList.toggle("gorunur")
             const storedProducting = localStorage.getItem(`${producting.id}`);
             if(storedProducting){
                 const parseProducting = JSON.parse(storedProducting)
-                subcontainer.innerHTML += `
-                    <img src="${parseProducting.thumbnail}">
+                subcontainer.innerHTML = `
+                    <div class="subsing">
+                        <div class="exitcontainer">
+                            <div class="exits">
+                                <i class="fa-regular fa-circle-xmark"></i>
+                            </div>
+                        </div>
+                        <div class="products-sub">
+                            <div class="product-image">
+                                <img src="${parseProducting.thumbnail}">
+                            </div>
+                            <div class="product-text"></div>
+                        </div>
+                    </div>
                 `
+                const exits = document.querySelector(".exits")
+                exits.addEventListener("click", function(){
+                    itemcontainer.classList.remove("gorunur")
+                })
             }
             else{
                 console.log("ürün bulunamadı");
