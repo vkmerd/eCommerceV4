@@ -42,3 +42,24 @@ font-family: var(--first-font);
 font-size: 18px;
 margin: 20px 0;
 }
+
+.product-itemscontainer{
+    display: none;
+}
+.prod-subcontainer {
+    -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    max-width: 100%;
+    height: 80%;
+    position: fixed;
+    left: 20%;
+    right: 20%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(2px);
+}
+.gorunur {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
