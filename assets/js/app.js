@@ -3,6 +3,7 @@ let limit = 100;
 const BASE_URL = `https://dummyjson.com/products?limit=${limit}`
 const itemcontainer = document.querySelector(".product-itemscontainer")
 const subcontainer = document.querySelector(".prod-subcontainer")
+const addProducts = document.querySelector(".addProduct");
 
 const productFetch = async () => {
     const productBk = await fetch(`${BASE_URL}`);
@@ -65,11 +66,20 @@ const prdfr = async() => {
     }
 }
 
-
+const addProduct = ()=>{
+    const addStorage = JSON.parse(localStorage.getItem("userData"))
+    addProducts.innerHTML += `
+        <div class="addProducting">
+            <img src="${addStorage.addimageBase}">
+            <h2>${addStorage.productAddTitle}</h2>
+        </div>
+    `
+}
 
 
 const init = () => {
-    prdfr()
+    prdfr();
+    addProduct();
 }
 
 init();
