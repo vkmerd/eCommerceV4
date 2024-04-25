@@ -66,15 +66,20 @@ const prdfr = async() => {
     }
 }
 
-const addProduct = ()=>{
-    const addStorage = JSON.parse(localStorage.getItem("userData"))
-    addProducts.innerHTML += `
-        <div class="addProducting">
-            <img src="${addStorage.addimageBase}">
-            <h2>${addStorage.productAddTitle}</h2>
-        </div>
-    `
+const addProduct = () => {
+    let productsStorage = JSON.parse(localStorage.getItem("userData")) || [];
+    addProducts.innerHTML = '';  
+
+    productsStorage.forEach(product => {
+        addProducts.innerHTML += `
+            <img src="${product.addimageBase}" class="img-homeimages">
+            <h3 class="product-title">${product.productAddTitle}</h3>
+            <p class="product-desc">${product.productAddDesc}</p>
+            <p class="product-price">$${product.productAddPrice}</p>
+        `;
+    });
 }
+
 
 
 const init = () => {

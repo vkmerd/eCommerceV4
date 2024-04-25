@@ -11,11 +11,13 @@ form.addEventListener("submit", function(e) {
     if (productAddImage) { 
         const reader = new FileReader();
         reader.onload = function(e) {
-            const addimageBase = e.target.result; 
-            localStorage.setItem('userData', JSON.stringify({ productAddTitle, productAddDesc, addimageBase, productAddPrice }));
+            const addimageBase = e.target.result;
+            let addStorageProducts = JSON.parse(localStorage.getItem("userData")) || [];
+            addStorageProducts.push({ productAddTitle, productAddDesc, addimageBase, productAddPrice });
+            localStorage.setItem('userData', JSON.stringify(addStorageProducts));
             alert('Data saved successfully!');
         };
         reader.readAsDataURL(productAddImage);
     }
-    window.location.href = "index.html"
+    window.location.href = "index.html"; 
 });
