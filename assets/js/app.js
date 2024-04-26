@@ -16,8 +16,7 @@ const prdfr = async() => {
     const products = productitems.products
     productContainer.innerHTML = ``
 
-    const categories = [...new Set(products.map(product => product.category))];
-    console.log(categories);
+
     for(const producting of products){
        const productBox = document.createElement('div')
        productBox.classList.add("product-box")
@@ -80,11 +79,51 @@ const addProduct = () => {
     });
 }
 
+const selectedFetch = async() => {
+    const selectProductİtems = await productFetch()
+    const products = selectProductİtems.products
 
+    const categories = [...new Set(products.map(product => product.category))];
+    const select = document.querySelector("#categorySelect")
+    categories.forEach(category => {
+        const option = document.createElement('option')
+        option.value = category;
+        option.textContent = category;
+        select.appendChild(option);
+    });
+    console.log(categories);
+}
 
+const filterByCategory = async () => {
+    const selectProductİtems = await productFetch()
+    const products = selectProductİtems.products
+    const filterProductinds = document.querySelector(".filterProductinds")
+    filterProductinds.innerHTML = '';
+    
+    const selectedCategory = document.querySelector("#categorySelect").value
+    const filterProducts = products.filter(product => product.category === selectedCategory)
+    
+    console.log(filterProducts);
+    
+    filterProducts.forEach(products2 => {
+        productContainer.innerHTML = '';
+        const createFilterProducts = document.createElement('div')
+        createFilterProducts.classList.add("createFilterProducts")
+        console.log(createFilterProducts);
+        createFilterProducts.innerHTML =`
+            <img src="${products2.thumbnail}">
+            <h3>${products2.title}</h3>
+            <p>${products2.description}</p>
+            <span>${products2.price}</span>
+            `
+            filterProductinds.appendChild(createFilterProducts)
+    });
+
+}
 const init = () => {
     prdfr();
     addProduct();
+    selectedFetch();
 }
 
 init();
