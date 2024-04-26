@@ -48,6 +48,7 @@ const prdfr = async() => {
                                 <h2>${parseProducting.title}</h2>
                                 <p>${parseProducting.description}</p>
                                 <p>${parseProducting.category}</p>
+                                <a href="#" data-add-id="${producting.id}"> Sepete Ekle </a>
                             </div>
                         </div>
                     </div>
@@ -114,7 +115,7 @@ const filterByCategory = async () => {
             <img src="${products2.thumbnail}">
             <h3>${products2.title}</h3>
             <p>${products2.description}</p>
-            <span>${products2.price}</span>
+            <span>$${products2.price}</span>
             `
             filterProductinds.appendChild(createFilterProducts)
     });
