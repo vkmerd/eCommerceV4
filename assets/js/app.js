@@ -63,13 +63,16 @@ const prdfr = async() => {
                         subBasketData.addEventListener("click" ,function(){
                             localStorage.setItem("subData", JSON.stringify(parseProducting))
                             basketCont.classList.toggle("basketContOpen")
-                            const subData = JSON.parse(localStorage.getItem("userData"))
-                            for (const subDatas of subData) {
+                                const subData = JSON.parse(localStorage.getItem("subData"));
                                 basketCont.innerHTML += `
-                                <img src="${subDatas.thumbnail}">
+                                <div class="basketFlex">
+                                   <div class="basketimg"> <img src="${subData.thumbnail}"></div>
+                                   <div class="basketText">
+                                        <h3>${subData.title}</h3>
+                                        <p>${subData.price}</p>
+                                   </div>
+                                </div>
                             `
-                            }
-                            
                         })
                     }
                     else{
