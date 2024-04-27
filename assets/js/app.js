@@ -4,6 +4,8 @@ const BASE_URL = `https://dummyjson.com/products?limit=${limit}`
 const itemcontainer = document.querySelector(".product-itemscontainer")
 const subcontainer = document.querySelector(".prod-subcontainer")
 const addProducts = document.querySelector(".addProduct");
+const basket = document.querySelector(".basket")
+const basketCont = document.querySelector(".basketCont")
 
 const productFetch = async () => {
     const productBk = await fetch(`${BASE_URL}`);
@@ -48,22 +50,38 @@ const prdfr = async() => {
                                 <h2>${parseProducting.title}</h2>
                                 <p>${parseProducting.description}</p>
                                 <p>${parseProducting.category}</p>
-                                <a href="#" data-add-id="${producting.id}"> Sepete Ekle </a>
+                                <a href="#" data-add-id="${producting.id}" class="subBasketData"> Sepete Ekle </a>
                             </div>
                         </div>
-                    </div>
-                `
-                const exits = document.querySelector(".exits")
-                exits.addEventListener("click", function(){
-                    itemcontainer.classList.remove("gorunur")
+                        </div>
+                        `
+                        const exits = document.querySelector(".exits")
+                        exits.addEventListener("click", function(){
+                            itemcontainer.classList.remove("gorunur")
+                        })
+                        const subBasketData = document.querySelector(".subBasketData")
+                        subBasketData.addEventListener("click" ,function(){
+                            localStorage.setItem("subData", JSON.stringify(parseProducting))
+                            basketCont.classList.toggle("basketContOpen")
+                            const subData = JSON.parse(localStorage.getItem("userData"))
+                            for (const subDatas of subData) {
+                                basketCont.innerHTML += `
+                                <img src="${subDatas.thumbnail}">
+                            `
+                            }
+                            
+                        })
+                    }
+                    else{
+                        console.log("ürün bulunamadı");
+                    }
+                    
                 })
-
-            }
-            else{
-                console.log("ürün bulunamadı");
-            }
-        })
     }
+    basket.addEventListener("click", function(e){
+        e.preventDefault();
+        basketCont.classList.toggle("basketContOpen")  
+    })
 }
 
 const addProduct = () => {
@@ -104,7 +122,7 @@ const filterByCategory = async () => {
     const selectedCategory = document.querySelector("#categorySelect").value
     const filterProducts = products.filter(product => product.category === selectedCategory)
     
-    console.log(filterProducts);
+    console.log(filterProducts)
     
     filterProducts.forEach(products2 => {
         productContainer.innerHTML = '';
@@ -119,7 +137,6 @@ const filterByCategory = async () => {
             `
             filterProductinds.appendChild(createFilterProducts)
     });
-
 }
 const init = () => {
     prdfr();

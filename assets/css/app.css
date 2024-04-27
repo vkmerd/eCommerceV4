@@ -22,15 +22,16 @@ height: auto;
 
 }
 
-a.basket {
+.basket {
     background-color: #000;
     color: #fff;
     padding: 10px 20px;
     text-decoration: none;
     font-family: var(--first-font);
     border-radius: 20px;
+    cursor: pointer;
 }
-a.basket i {
+.basket i {
     padding-right: 10px;
 }
 
@@ -165,4 +166,18 @@ select#categorySelect option:hover{
     background-color: #fff;
     color: #000;
     transition: 0.3s;
+}
+
+.basketCont{
+    display: none;
+}
+
+.basketContOpen {
+    display: block;
+    transition: 3s;
+    position: absolute;
+    top: 80px;
+    width: 300px;
+    height: 200px;
+    background-color: #000;
 }
